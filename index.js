@@ -65,6 +65,8 @@ function game() {
     console.log(`ROUND ${round}: ${result.message}`);
   }
 
+  // TODO - FIX BUG WITH FINAL SCORE
+
   console.log(
     `FINAL SCORE: PLAYER ONE ${scoreboard.playerOne} | PLAYER TWO ${scoreboard.playerTwo}`
   );
