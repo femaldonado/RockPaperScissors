@@ -1,75 +1,78 @@
-function getRandomNumber(maxNum) {
-  return Math.floor(Math.random() * maxNum);
-}
-
 function computerPlay() {
-  // returns random number between 0-2
-  const computerChoice = getRandomNumber(3);
-  const choices = ["rock", "paper", "scissors"];
+  let computerChoice = Math.floor(Math.random() * 3)
 
-  return choices[computerChoice];
-}
-
-function formatSelection(choice) {
-  return choice.toUpperCase();
-}
-
-function isPlayerOneWinner(choiceOne, choiceTwo) {
-  return (
-    (choiceOne === "ROCK" && choiceTwo === "SCISSORS") ||
-    (choiceOne === "SCISSORS" && choiceTwo === "PAPER") ||
-    (choiceOne === "PAPER" && choiceTwo === "ROCK")
-  );
-}
-
-function playRound(playerOneChoice, playerTwoChoice) {
-  const formattedPlayerOneChoice = formatSelection(playerOneChoice);
-  const formattedPlayerTwoChoice = formatSelection(playerTwoChoice);
-
-  if (formattedPlayerOneChoice === formattedPlayerTwoChoice) {
-    return { message: "It's a tie!", winner: 0 };
+  if (computerChoice == 1) {
+    return "rock";
   }
 
-  const didPlayerOneWin = isPlayerOneWinner(
-    formattedPlayerOneChoice,
-    formattedPlayerTwoChoice
-  );
-
-  if (didPlayerOneWin) {
-    return {
-      message: `You Win! ${playerOneChoice.toLowerCase()} beats ${playerTwoChoice.toLowerCase()}`,
-      winner: 1
-    };
+  if (computerChoice == 2) {
+    return "paper";
   }
 
-  return {
-    message: `You Lose! ${playerTwoChoice.toLowerCase()} beats ${playerOneChoice.toLowerCase()}`,
-    winner: 2
-  };
+  return "scissors";
 }
 
-function game() {
-  const scoreboard = { playerOne: 0, playerTwo: 0 };
-
-  for (let round = 1; round <= 5; round++) {
-    const playerSelection = prompt(`Round ${round}: Rock, Paper, or Scissors?`);
-    const computerSelection = computerPlay();
-    const result = playRound(playerSelection, computerSelection);
-
-    if (result.winner === 1) {
-      ++scoreboard.playerOne;
-    } else {
-      ++scoreboard.playerTwo;
-    }
-
-    console.log(`ROUND ${round}: ${result.message}`);
+function playRound(playerSelection, computerSelection) {
+  if (
+    playerSelection.toUpperCase() === "ROCK" &&
+    computerSelection === "paper"
+  ) {
+    return "You Lose! Paper beats Rock";
+  } else if (
+    playerSelection.toUpperCase() === "ROCK" &&
+    computerSelection === "Rock"
+  ) {
+    return "It's a tie!";
+  } else if (
+    playerSelection.toUpperCase() === "ROCK" &&
+    computerSelection === "Scissors"
+  ) {
+    return "You win, Rock beats Scissors!";
   }
 
-  // TODO - FIX BUG WITH FINAL SCORE
+  if (
+    playerSelection.toUpperCase() === "SCISSORS" &&
+    computerSelection === "Rock"
+  ) {
+    return "You lose,Rock beats Scissors!";
+  } else if (
+    playerSelection.toUpperCase() === "SCISSORS" &&
+    computerSelection === "Scissors"
+  ) {
+    return "It's a tie!";
+  } else if (
+    playerSelection.toUpperCase() === "SCISSORS" &&
+    computerSelection === "Paper"
+  ) {
+    return "You win, Scissors beats Paper!";
+  }
 
-  console.log(
-    `FINAL SCORE: PLAYER ONE ${scoreboard.playerOne} | PLAYER TWO ${scoreboard.playerTwo}`
-  );
+  if (
+    playerSelection.toUpperCase() === "PAPER" &&
+    computerSelection === "Scissors"
+  ) {
+    return "You lose, Scissors beats Paper!";
+  } else if (
+    playerSelection.toUpperCase() === "PAPER" &&
+    computerSelection === "Paper"
+  ) {
+    return "It's a tie!";
+  } else if (
+    playerSelection.toUpperCase() === "PAPER" &&
+    computerSelection === "Rock"
+  ) {
+    return "You win, Paper beats Rock!";
+  }
 }
 
-game();
+const playerSelection = "rock";
+const computerSelection = computerPlay();
+console.log(playRound(playerSelection, computerSelection));
+
+//for (let i = 0; i < 5; i++) {
+// your code here!
+//}
+
+//function playerPlay() {
+//let playerSelection = ["rock", "paper", "scissors"];
+// }
